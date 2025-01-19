@@ -5,7 +5,8 @@ sua escolha:
     então guardados em um buffer, e assim que o processamento pesado termina, o buffer é esvaziado
     e os caracteres mostrados na tela.
 
-    Resposta:
+    Resposta: Pilha pois assim, a cada vez que uma tecla é digitada ela seria mandada para o topo 
+    da pilha, e quando o processamento termina, todas as teclas pressionadas são desempilhadas
     
     b) Chamada de função: um programa principal pode chamar uma função, esta chamar outra
     função, esta chamar um procedimento, este chamar outra função, e assim por diante. O sistema
