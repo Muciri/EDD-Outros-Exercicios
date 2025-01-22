@@ -46,6 +46,18 @@ class lista_encadeada:
         novo.prox = cursor
         self.__tamanho += 1
 
+    def insere_ordenado(self, carga:any):
+        novo = no(carga)
+        if self.vazia() or novo.carga < self.__head.carga:
+            novo.prox = self.__head
+            self.__head = novo
+            return
+        cursor = self.__head
+        while cursor.prox != None and cursor.prox.carga < novo.carga:
+            cursor = cursor.prox
+        novo.prox = cursor.prox
+        cursor.prox = novo
+
     def insere_final(self, carga:any):
         novo = no(carga)
         if self.vazia():
@@ -62,15 +74,14 @@ class lista_encadeada:
             raise ListaError("a lista está vazia")
         if num < 0 or num >= self.__tamanho:
             raise ListaError("valor fora do intervalo")
-        if len(self) == 1:
+        if len(self) == 1 or num == 0:
             self.__head = self.__head.prox
         else:
-            cont = 0
             cursor = self.__head
-            while cont != num-1:
+            for i in range(num):
+                anterior = cursor
                 cursor = cursor.prox
-                cont += 1
-            cursor.prox = cursor.prox.prox
+            anterior.prox = cursor.prox
         self.__tamanho -= 1
 
     def modifica(self, num, carga):
@@ -109,33 +120,52 @@ class lista_encadeada:
                 return cont
             cursor = cursor.prox
             cont += 1
-        return -1 
+        return -1
 
 #teste
 if __name__ == '__main__':
     #teste lista sequencial
     teste = lista_encadeada()
-    teste.insere('1')
-    teste.insere('2')
-    teste.insere('3')
-    teste.insere('4')
-    teste.insere('5')
-    print(teste)
-    teste.modifica(3, '10')
-    teste.modifica(4, '20')
-    print(teste)
-    teste.remove(1)
-    print(teste)
-    teste.remove(2)
+    teste.insere_final(10)
+    teste.insere_final(20)
+    teste.insere_final(30)
+    teste.insere_final(40)
+    teste.insere_final(50)
     print(teste)
     print('-------')
-    print(teste.busca_elemento(1))
-    print(teste.busca_elemento(2))
+    teste.insere_ordenado(1)
+    teste.insere_ordenado(35)
+    teste.insere_ordenado(60)
+    print(teste)
+    print('-------')
+    
+    # teste.insere(1, '0.5')
+    # teste.insere(3, '3.5')
+    # print(teste)
+    # print('-------')
+    
+    # teste.modifica(3, '35')
+    # teste.modifica(4, '30')
+    # print(teste)
+    # print('-------')
 
-    print('-------')
-    print(teste.busca('1'))
-    print(teste.busca('3'))
-
-    print('-------')
-    print(teste.busca_posicao('3'))
-    print(teste.busca_posicao('4'))
+    # teste.remove(0)
+    # print(teste)
+    # teste.remove(1)
+    # print(teste)
+    # teste.remove(2)
+    # print(teste)
+    # teste.remove(3)
+    # print(teste)
+    # print('-------')
+    
+    # print(teste.busca_elemento(1))
+    # print(teste.busca_elemento(2))
+    # print('-------')
+    
+    # print(teste.busca('35'))
+    # print(teste.busca('4')) 
+    # print('-------')
+    
+    # print(teste.busca_posicao('3'))
+    # print(teste.busca_posicao('4'))

@@ -46,17 +46,6 @@ class lista_encadeada:
         novo.prox = cursor
         self.__tamanho += 1
 
-    def insere_final(self, carga:any):
-        novo = no(carga)
-        if self.vazia():
-            self.__head = novo
-        else:
-            cursor = self.__head
-            while(cursor.prox != None):
-                cursor = cursor.prox
-            cursor.prox = novo
-        self.__tamanho += 1
-
     def remove(self, num):
         if self.vazia():
             raise ListaError("a lista está vazia")
@@ -109,33 +98,55 @@ class lista_encadeada:
                 return cont
             cursor = cursor.prox
             cont += 1
-        return -1 
+        return -1
+    
+    #MÉTODOS DO EXERCÍCIO 
+    #------QUESTÃO 2------ 
+    def maiores(self, n):
+        cont = 0
+        cursor = self.__head
+        try:
+            while(cursor != None):
+                if cursor.carga > n:
+                    cont += 1
+                cursor = cursor.prox
+        except TypeError:
+            raise ListaError('elemento oferecido difere em tipo do elemento da lista')
+        return cont
+    
+    #------QUESTÃO 3------ 
+    def insere_inicio(self, carga:any):
+        novo = no(carga)
+        if not self.vazia():
+            novo.prox = self.__head
+        self.__head = novo
+        self.__tamanho += 1
+
+    def insere_final(self, carga:any):
+        novo = no(carga)
+        if self.vazia():
+            self.__head = novo
+        else:
+            cursor = self.__head
+            while(cursor.prox != None):
+                cursor = cursor.prox
+            cursor.prox = novo
+        self.__tamanho += 1
 
 #teste
 if __name__ == '__main__':
     #teste lista sequencial
     teste = lista_encadeada()
-    teste.insere('1')
-    teste.insere('2')
-    teste.insere('3')
-    teste.insere('4')
-    teste.insere('5')
+    teste.insere_inicio(1)
+    teste.insere_final(2)
+    teste.insere_final(3)
+    teste.insere_final(4)
+    teste.insere_final(5)
     print(teste)
-    teste.modifica(3, '10')
-    teste.modifica(4, '20')
+    print('-------------')
+    teste.insere_inicio(6)
     print(teste)
-    teste.remove(1)
-    print(teste)
-    teste.remove(2)
-    print(teste)
-    print('-------')
-    print(teste.busca_elemento(1))
-    print(teste.busca_elemento(2))
-
-    print('-------')
-    print(teste.busca('1'))
-    print(teste.busca('3'))
-
-    print('-------')
-    print(teste.busca_posicao('3'))
-    print(teste.busca_posicao('4'))
+    print('-------------')
+    teste.modifica(3, 10)
+    teste.modifica(4, 20)
+    print( teste.maiores(10) )

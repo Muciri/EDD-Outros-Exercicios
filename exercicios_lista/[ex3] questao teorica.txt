@@ -1,0 +1,18 @@
+1) Partindo da situação mostrada na ilustração abaixo, considerando p e q referências (head) para duas
+listas encadeadas distintas, determine o conteúdo das listas após as seguintes atribuições:
+
+p -> p1 -> p2 -> p3 -> None
+
+q -> q1 -> q2 -> q3 -> None
+
+Observação: cada item parte da situação inicial:
+a) p.prox = q.prox
+    Resposta: 
+b) p = q
+    Resposta: p se torna igual a q, por se tornar outra instância do objeto q
+c) p = None
+    resposta: p se tona none
+d) p = p.prox
+    resposta: 
+e) p.dado = p.prox.dado
+    resposta: p se torna p1
