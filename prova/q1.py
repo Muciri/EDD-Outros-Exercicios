@@ -101,7 +101,9 @@ class fila_encadeada:
 
         if cont < limiar:
             for i in range(self.__head.tamanho):
-                self.desenfileira()
+                self.__head.frente = None
+                self.__head.fim = None
+                self.__head.tamanho = 0
             return 'fila esvaziada com sucesso'
         else:
             return 'fila não pode ser esvaziada'
@@ -116,5 +118,5 @@ if __name__ == '__main__':
     teste.enfileira(4)
     teste.enfileira(5)
 
-    print(teste.esvaziar(1))
+    print(teste.esvaziar(16))
     print(teste)
